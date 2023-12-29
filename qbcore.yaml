@@ -8,7 +8,7 @@ description: An advanced FiveM RP framework including jobs, gangs, housing & mor
 tasks:
   #  Download Base Files
   - action: download_github
-    src: https://github.com/qbcore-framework/txAdminRecipe
+    src: https://github.com/chokeslam46/txAdminRecipe
     ref: main
     dest: ./tmp/qbcore
 
@@ -44,6 +44,13 @@ tasks:
   - action: unzip
     dest: ./resources/[standalone]/menuv
     src: ./tmp/menuv.zip
+
+  - action: download_file
+    path: ./tmp/QB-Disable-Radio.zip
+    url: https://github.com/IanToujou/QB-Disable-Radio/releases/download/v1.0.1/QB-Disable-Radio-v1.0.1.zip
+  - action: unzip
+    dest: ./resources/[qb]/QB-Disable-Radio
+    src: ./tmp/QB-Disable-Radio.zip
 
   - action: download_github
     dest: ./resources/[standalone]/bob74_ipl
@@ -438,6 +445,11 @@ tasks:
     dest: ./resources/[qb]/qb-loading
     ref: main
     src: https://github.com/qbcore-framework/qb-loading
+
+  - action: download_github
+    dest: ./resources/[ps]/ps-multijob
+    ref: main
+    src: https://github.com/Project-Sloth/ps-multijob
 
   # Clean up
   - action: remove_path

@@ -310,3 +310,20 @@ CREATE TABLE IF NOT EXISTS `trunkitems` (
   PRIMARY KEY (`plate`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+-- ps-multijob
+CREATE TABLE IF NOT EXISTS `multijobs` (
+  `citizenid` varchar(100) NOT NULL,
+  `jobdata` text DEFAULT NULL,
+  PRIMARY KEY (`citizenid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- jim-mechanic
+ALTER TABLE `player_vehicles`
+ADD COLUMN `nosColour` TEXT NULL DEFAULT NULL;
+ALTER TABLE `player_vehicles`
+ADD COLUMN `traveldistance` INT(50) NULL DEFAULT 0;
+ALTER TABLE `player_vehicles`
+ADD COLUMN `noslevel` INT(10) NULL DEFAULT 0;
+ALTER TABLE `player_vehicles`
+ADD COLUMN `hasnitro` TINYINT(0) NULL DEFAULT 0;
