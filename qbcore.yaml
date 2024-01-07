@@ -50,7 +50,7 @@ tasks:
     url: https://github.com/IanToujou/QB-Disable-Radio/releases/download/v1.0.1/QB-Disable-Radio-v1.0.1.zip
   - action: unzip
     dest: ./tmp/QB-Disable-Radio
-    src: ./tmp/cdn-fuel.zip
+    src: ./tmp/QB-Disable-Radio.zip
   - action: move_path
     dest: ./resources/[qb]/QB-Disable-Radio
     src: ./tmp/QB-Disable-Radio/qb_disable_radio
