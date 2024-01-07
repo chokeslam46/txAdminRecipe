@@ -487,7 +487,7 @@ tasks:
 
   - action: download_github
     dest: ./resources/[standalone]/rpemotes
-    ref: main
+    ref: master
     src: https://github.com/TayMcKenzieNZ/rpemotes
 
   - action: download_github
