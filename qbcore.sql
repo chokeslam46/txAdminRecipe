@@ -73,35 +73,6 @@ CREATE TABLE IF NOT EXISTS `dealers` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `houselocations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `label` varchar(255) DEFAULT NULL,
-  `coords` text DEFAULT NULL,
-  `owned` tinyint(1) DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
-  `tier` tinyint(4) DEFAULT NULL,
-  `garage` text DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE IF NOT EXISTS `player_houses` (
-  `id` int(255) NOT NULL AUTO_INCREMENT,
-  `house` varchar(50) NOT NULL,
-  `identifier` varchar(50) DEFAULT NULL,
-  `citizenid` varchar(11) DEFAULT NULL,
-  `keyholders` text DEFAULT NULL,
-  `decorations` text DEFAULT NULL,
-  `stash` text DEFAULT NULL,
-  `outfit` text DEFAULT NULL,
-  `logout` text DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `house` (`house`),
-  KEY `citizenid` (`citizenid`),
-  KEY `identifier` (`identifier`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
-
 CREATE TABLE IF NOT EXISTS `house_plants` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `building` varchar(50) DEFAULT NULL,
@@ -327,3 +298,44 @@ ALTER TABLE `player_vehicles`
 ADD COLUMN `noslevel` INT(10) NULL DEFAULT 0;
 ALTER TABLE `player_vehicles`
 ADD COLUMN `hasnitro` TINYINT(0) NULL DEFAULT 0;
+
+-- kq_engineswaps
+CREATE TABLE IF NOT EXISTS `kq_tuning` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `plate` varchar(50) NOT NULL DEFAULT '',
+  `engine` varchar(50) NOT NULL DEFAULT '',
+  `tuned_by` varchar(50) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2148 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `kq_tuningparts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `storage` varchar(50) NOT NULL DEFAULT '0',
+  `type` varchar(50) NOT NULL DEFAULT '0',
+  `part` varchar(50) NOT NULL DEFAULT '0',
+  `available_at` bigint(20) NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4;
+
+-- ps-housing
+CREATE TABLE IF NOT EXISTS `properties` (
+    `property_id` int(11) NOT NULL AUTO_INCREMENT,
+    `owner_citizenid` varchar(50) NULL,
+    `street` VARCHAR(100) NULL,
+    `region` VARCHAR(100) NULL,
+    `description` LONGTEXT NULL,
+    `has_access` JSON NULL DEFAULT (JSON_ARRAY()), -- [citizenid1, citizenid2, ...]
+    `extra_imgs` JSON NULL DEFAULT (JSON_ARRAY()),
+    `furnitures` JSON NULL DEFAULT (JSON_ARRAY()),
+    `for_sale` boolean NOT NULL DEFAULT 1,
+    `price` int(11) NOT NULL DEFAULT 0,
+    `shell` varchar(50) NOT NULL,
+    `apartment` varchar(50) NULL DEFAULT NULL, -- if NULL then it's a house
+    `door_data` JSON NULL DEFAULT NULL, -- {"x": 0.0, "y": 0.0, "z": 0.0, "h": 0.0, "length": 0.0, "width": 0.0}
+    `garage_data` JSON NULL DEFAULT NULL, -- {"x": 0.0, "y": 0.0, "z": 0.0} -- NULL if no garage
+    PRIMARY KEY (`property_id`),
+    CONSTRAINT `FK_owner_citizenid` FOREIGN KEY (`owner_citizenid`) REFERENCES `players` (`citizenid`) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT `UQ_owner_apartment` UNIQUE (`owner_citizenid`, `apartment`) -- A character can only own one apartment
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

@@ -49,8 +49,28 @@ tasks:
     path: ./tmp/QB-Disable-Radio.zip
     url: https://github.com/IanToujou/QB-Disable-Radio/releases/download/v1.0.1/QB-Disable-Radio-v1.0.1.zip
   - action: unzip
+    dest: ./tmp/QB-Disable-Radio
+    src: ./tmp/cdn-fuel.zip
+  - action: move_path
     dest: ./resources/[qb]/QB-Disable-Radio
-    src: ./tmp/QB-Disable-Radio.zip
+    src: ./tmp/QB-Disable-Radio/qb_disable_radio
+
+  - action: download_file
+    path: ./tmp/cdn-fuel.zip
+    url: https://github.com/CodineDev/cdn-fuel/releases/download/2.1.9/cdn-fuel-2.1.9.zip
+  - action: unzip
+    dest: ./resources/[standalone]
+    src: ./tmp/cdn-fuel.zip
+
+  - action: download_file
+    path: ./tmp/ox_lib.zip
+    url: https://github.com/overextended/ox_lib/releases/download/v3.14.0/ox_lib.zip
+  - action: unzip
+    dest: ./resources/[ox]
+    src: ./tmp/ox_lib.zip
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
 
   - action: download_github
     dest: ./resources/[standalone]/bob74_ipl
@@ -92,11 +112,10 @@ tasks:
     ref: master
     src: https://github.com/qbcore-framework/PolyZone
 
-  - action: download_github
-    dest: ./resources/[standalone]/LegacyFuel
-    ref: master
-    src: https://github.com/qbcore-framework/LegacyFuel
-
+  # - action: download_github
+  #   dest: ./resources/[standalone]/LegacyFuel
+  #   ref: master
+  #   src: https://github.com/qbcore-framework/LegacyFuel
   - action: waste_time # prevent github throttling
     seconds: 10
 
@@ -204,10 +223,10 @@ tasks:
     ref: main
     src: https://github.com/qbcore-framework/qb-inventory
 
-  - action: download_github
-    dest: ./resources/[qb]/qb-houses
-    ref: main
-    src: https://github.com/qbcore-framework/qb-houses
+  # - action: download_github
+  #   dest: ./resources/[qb]/qb-houses
+  #   ref: main
+  #   src: https://github.com/qbcore-framework/qb-houses
 
   - action: download_github
     dest: ./resources/[qb]/qb-garages
@@ -247,20 +266,20 @@ tasks:
     ref: main
     src: https://github.com/qbcore-framework/qb-traphouse
 
-  - action: download_github
-    dest: ./resources/[qb]/qb-apartments
-    ref: main
-    src: https://github.com/qbcore-framework/qb-apartments
+  # - action: download_github
+  #   dest: ./resources/[qb]/qb-apartments
+  #   ref: main
+  #   src: https://github.com/qbcore-framework/qb-apartments
 
   - action: download_github
     dest: ./resources/[qb]/qb-vehiclekeys
     ref: main
     src: https://github.com/qbcore-framework/qb-vehiclekeys
 
-  - action: download_github
-    dest: ./resources/[qb]/qb-mechanicjob
-    ref: main
-    src: https://github.com/qbcore-framework/qb-mechanicjob
+  # - action: download_github
+  #   dest: ./resources/[qb]/qb-mechanicjob
+  #   ref: main
+  #   src: https://github.com/qbcore-framework/qb-mechanicjob
 
   - action: download_github
     dest: ./resources/[qb]/qb-phone
@@ -448,8 +467,33 @@ tasks:
 
   - action: download_github
     dest: ./resources/[ps]/ps-multijob
-    ref: main
+    ref: 1.1.3
     src: https://github.com/Project-Sloth/ps-multijob
+
+  - action: download_github
+    dest: ./resources/[ps]/ps-housing
+    ref: 1.2.0
+    src: https://github.com/Project-Sloth/ps-housing
+
+  - action: download_github
+    dest: ./resources/[ps]/ps-realtor
+    ref: 0.0.5
+    src: https://github.com/Project-Sloth/ps-realtor
+
+  - action: download_github
+    dest: ./resources/[local]/NoNPC
+    ref: main
+    src: https://github.com/ZAD4YTV/NoNPC
+
+  - action: download_github
+    dest: ./resources/[standalone]/rpemotes
+    ref: main
+    src: https://github.com/TayMcKenzieNZ/rpemotes
+
+  - action: download_github
+    dest: ./resources/[standalone]/fivem-freecam
+    ref: v1.0.0
+    src: https://github.com/Deltanic/fivem-freecam
 
   # Clean up
   - action: remove_path
